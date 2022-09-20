@@ -3,4 +3,59 @@ title: "Data Import"
 output: github_document
 ---
 
+
+```{r, echo = FALSE}
+library(tidyverse)
+```
+
 ## Data Import:CSVs
+
+Let's import data using the `readr` package
+
+```{r}
+litters_df = read_csv("data_import_examples/FAS_litters.csv")
+#naming the file as litters dataframe
+
+litters_df = janitor::clean_names(litters_df)
+#janitor package 
+#clean_names function within janitor package
+#prevents from loading to many names
+```
+
+Look at the data
+```{r}
+litters_df
+
+#first six rows
+head(litters_df)
+
+#last six rows
+tail(litters_df)
+
+view(litters_df)
+#prints entire dataset
+#use with eval=false so it doesn't break when knitting
+
+skimr::skim(litters_df)
+#quick summary of entire dataset
+```
+
+```{r, eval = FALSE}
+#eval = FALSE
+
+```
+
+`read.csv` options..
+col_names = TRUE - first row are the column headers
+
+```{r}
+read_csv("data_import_examples/FAS_litters.csv", na = c("", "NA", 999, 88), skip = 2)
+#telling R it is missing
+#skip = "#" - telling R to skip certain number of rows
+```
+<chr> = character variable
+<dbl> = number variable
+
+## col_types = --> use to correct variable type if R has incorrectly labeled them
+
+##other file formats
