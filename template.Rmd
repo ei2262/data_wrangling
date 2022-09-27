@@ -6,6 +6,10 @@ output: github_document
 
 ```{r, echo = FALSE}
 library(tidyverse)
+library(readxl) 
+## use library(readxl) to import package to import in excel files
+library(haven)
+## use library(haven) to import package to import SAS datasets
 ```
 
 ## Data Import:CSVs
@@ -59,3 +63,31 @@ read_csv("data_import_examples/FAS_litters.csv", na = c("", "NA", 999, 88), skip
 ## col_types = --> use to correct variable type if R has incorrectly labeled them
 
 ##other file formats
+
+We need to read in an excel spreadsheet...
+
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx")
+mlb_df = read_excel("data/mlb11.xlsx", range = "B3:B6")
+#adding range will only print out those cells
+mlb_df
+
+lotr_words_df = read_excel("data/LotR_Words.xlsx")
+```
+
+## do not commit the files that are temporarily created
+
+##importing SAS dataset
+
+```{r}
+pulse_df = read_sas("data/public_pulse_Data.sas7bdat")
+pulse_df
+```
+
+##data export
+```{r}
+write_csv(lotr_words_df, file = "lotr_words_df.csv")
+```
+
+
+
